@@ -8,7 +8,6 @@ var token = '';
 uploadExcel('./something.xlsx');
 
 function uploadExcel(filename) {
-  //utf-8
   fs.readFile(filename, 'binary', (err, data) => {
     if (err) {
       console.log("FATAL An error occurred trying to read in the file: " + err);
@@ -19,7 +18,6 @@ function uploadExcel(filename) {
     }
     else {
       console.log("No data to post");
-      defer.resolve(null);
     }
   });
 }
@@ -32,7 +30,6 @@ function uploadToWit(stream) {
       maxAttempts: 3,
       method: 'POST',
       retryDelay: 250,
-      // json: true,
       body: stream,
       retryStrategy: request.RetryStrategies.HTTPOrNetworkError,
       headers: {
@@ -46,7 +43,6 @@ function uploadToWit(stream) {
       if (error) {
         console.log('failed request');
         console.log(error);
-        // deferred.reject(error);
       } else {
         console.log('success request');
         console.log(jsonResponse.body);
